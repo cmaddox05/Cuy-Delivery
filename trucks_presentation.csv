@@ -1,0 +1,6 @@
+truck_name,fixed_cost,per_mile_cost,capacity
+Kite,55,3.5,75
+Heron,120,2.25,120
+Pelican,160,1.5,150
+Albatross,240,1.25,220
+Condor,185,2.75,999999
