@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3f5441cefe793c56c3ce4710a54bf424 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-ant-path@1.1.2/dist/leaflet-ant-path.min.js"></script>
+</head>
+<body>
+    
+    
+    <div style='position: fixed; bottom: 28px; left: 28px; z-index:9999;
+                background: rgba(255,255,255,0.95); padding: 12px 14px;
+                border: 2px solid #2c3e50; border-radius: 12px;
+                box-shadow: 0 2px 12px rgba(0,0,0,.18); font-size: 13px; min-width: 180px;'>
+        <div style='font-size:14px; font-weight:700; margin-bottom:8px;'>Recommended Route Map — Heron + Pelican</div>
+        <div style='margin-bottom:4px;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#e74c3c;margin-right:8px;'></span>HQ</div>
+        <div style='margin-bottom:4px;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#e74c3c;margin-right:8px;'></span>Heron — Truck 1</div><div style='margin-bottom:4px;'><span style='display:inline-block;width:12px;height:12px;border-radius:50%;background:#27ae60;margin-right:8px;'></span>Pelican — Truck 2</div>
+        <div style='margin-top:8px; font-size:11px; color:#555;'>Numbered stops show delivery order.</div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_3f5441cefe793c56c3ce4710a54bf424" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3f5441cefe793c56c3ce4710a54bf424 = L.map(
+                "map_3f5441cefe793c56c3ce4710a54bf424",
+                {
+                    center: [32.828553084615386, -96.80405030769231],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+
+            
+
+        
+    
+            var tile_layer_2bfd487b0c2fd7cc527124e70764d4fd = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2bfd487b0c2fd7cc527124e70764d4fd.addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var marker_88c9c0d37fbc6751c2f264e6920e4302 = L.marker(
+                [32.8538198, -96.8470282],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var icon_a7596d882351d1321526e984c1e919d4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bd08ff6c90869c9ed5eab68287421446 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_1832a9a1ee5bf367dab386d536272e68 = $(`<div id="html_1832a9a1ee5bf367dab386d536272e68" style="width: 100.0%; height: 100.0%;"><b>HQ</b><br>8333 George Coker Cir, Dallas, TX</div>`)[0];
+                popup_bd08ff6c90869c9ed5eab68287421446.setContent(html_1832a9a1ee5bf367dab386d536272e68);
+            
+        
+
+        marker_88c9c0d37fbc6751c2f264e6920e4302.bindPopup(popup_bd08ff6c90869c9ed5eab68287421446)
+        ;
+
+        
+    
+    
+            marker_88c9c0d37fbc6751c2f264e6920e4302.bindTooltip(
+                `<div>
+                     HQ
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_88c9c0d37fbc6751c2f264e6920e4302.setIcon(icon_a7596d882351d1321526e984c1e919d4);
+            
+    
+            var poly_line_f132d81fce2d35760cc88af5f5bba421 = L.polyline(
+                [[32.8538198, -96.8470282], [32.8646389, -96.8360334], [32.8360558, -96.8063526], [32.8206379, -96.7846687], [32.9008117, -96.7697861], [32.8647842, -96.6771251], [32.8538198, -96.8470282]],
+                {"bubblingMouseEvents": true, "color": "#e74c3c", "dashArray": "8, 6", "dashOffset": null, "fill": false, "fillColor": "#e74c3c", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            ant_path_4e2c2212074c2edf9d81547a0f1ffe26 = L.polyline.antPath(
+              [[32.8538198, -96.8470282], [32.8646389, -96.8360334], [32.8360558, -96.8063526], [32.8206379, -96.7846687], [32.9008117, -96.7697861], [32.8647842, -96.6771251], [32.8538198, -96.8470282]],
+              {
+  "stroke": true,
+  "color": "#e74c3c",
+  "weight": 4,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+12,
+24,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#e74c3c",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 900,
+  "pulseColor": "#e74c3c",
+}
+        ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var marker_3bbe8804900f650caa88e922c7c78263 = L.marker(
+                [32.8646389, -96.8360334],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_c5005981338a7b575fd34f7e13c6daf2 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #e74c3c; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e1\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_03aeae4162254b7aca6cb764d286f3fc = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d5b59cba24aebbd51d210a6fdfc69c31 = $(`<div id="html_d5b59cba24aebbd51d210a6fdfc69c31" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 1: The Original Pancuy House</div>                     <div><b>Allocated entrees:</b> 20</div>                     <div><b>Net margin:</b> $92.00</div>                     <div><b>Gross profit:</b> $1360.00</div>                     <div><b>Cumulative miles:</b> 1.36</div>                 </div>             </div>`)[0];
+                popup_03aeae4162254b7aca6cb764d286f3fc.setContent(html_d5b59cba24aebbd51d210a6fdfc69c31);
+            
+        
+
+        marker_3bbe8804900f650caa88e922c7c78263.bindPopup(popup_03aeae4162254b7aca6cb764d286f3fc)
+        ;
+
+        
+    
+    
+            marker_3bbe8804900f650caa88e922c7c78263.bindTooltip(
+                `<div>
+                     1. The Original Pancuy House
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3bbe8804900f650caa88e922c7c78263.setIcon(div_icon_c5005981338a7b575fd34f7e13c6daf2);
+            
+    
+            var marker_4059491f5ae766cf680b9bc25686f941 = L.marker(
+                [32.8360558, -96.8063526],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_18c31e159e514c6a5072141fc181e846 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #e74c3c; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e2\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_76ead3d41999c7d0893d4ba5cc203916 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_27e987ef5b0c20780e38383cfb99d438 = $(`<div id="html_27e987ef5b0c20780e38383cfb99d438" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 2: Café South Pacific Cuy</div>                     <div><b>Allocated entrees:</b> 20</div>                     <div><b>Net margin:</b> $67.00</div>                     <div><b>Gross profit:</b> $860.00</div>                     <div><b>Cumulative miles:</b> 4.83</div>                 </div>             </div>`)[0];
+                popup_76ead3d41999c7d0893d4ba5cc203916.setContent(html_27e987ef5b0c20780e38383cfb99d438);
+            
+        
+
+        marker_4059491f5ae766cf680b9bc25686f941.bindPopup(popup_76ead3d41999c7d0893d4ba5cc203916)
+        ;
+
+        
+    
+    
+            marker_4059491f5ae766cf680b9bc25686f941.bindTooltip(
+                `<div>
+                     2. Café South Pacific Cuy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4059491f5ae766cf680b9bc25686f941.setIcon(div_icon_18c31e159e514c6a5072141fc181e846);
+            
+    
+            var marker_86ddf3248de7cc90caf80119d62c7c78 = L.marker(
+                [32.8206379, -96.7846687],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_38b151f96ee46d54d345a4ea0dfc7c69 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #e74c3c; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e3\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_5670bf9df5cd01e47d43fb70c0124eaa = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_fe02107281e359d7dbbc4ea60eba5852 = $(`<div id="html_fe02107281e359d7dbbc4ea60eba5852" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 3: Tei Tei Cuy Robata</div>                     <div><b>Allocated entrees:</b> 10</div>                     <div><b>Net margin:</b> $137.00</div>                     <div><b>Gross profit:</b> $1130.00</div>                     <div><b>Cumulative miles:</b> 6.86</div>                 </div>             </div>`)[0];
+                popup_5670bf9df5cd01e47d43fb70c0124eaa.setContent(html_fe02107281e359d7dbbc4ea60eba5852);
+            
+        
+
+        marker_86ddf3248de7cc90caf80119d62c7c78.bindPopup(popup_5670bf9df5cd01e47d43fb70c0124eaa)
+        ;
+
+        
+    
+    
+            marker_86ddf3248de7cc90caf80119d62c7c78.bindTooltip(
+                `<div>
+                     3. Tei Tei Cuy Robata
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_86ddf3248de7cc90caf80119d62c7c78.setIcon(div_icon_38b151f96ee46d54d345a4ea0dfc7c69);
+            
+    
+            var marker_a87bb7498ab3325a8652887f68d0db64 = L.marker(
+                [32.9008117, -96.7697861],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_c6c6fdcd13198487b231437baea6d532 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #e74c3c; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e4\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_7f4971f366cda38531a216b8c2205c48 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2377f7074c9548c6de66193ab54b05d9 = $(`<div id="html_2377f7074c9548c6de66193ab54b05d9" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 4: Cindi's NY Cuycatesson</div>                     <div><b>Allocated entrees:</b> 16</div>                     <div><b>Net margin:</b> $82.00</div>                     <div><b>Gross profit:</b> $928.00</div>                     <div><b>Cumulative miles:</b> 13.54</div>                 </div>             </div>`)[0];
+                popup_7f4971f366cda38531a216b8c2205c48.setContent(html_2377f7074c9548c6de66193ab54b05d9);
+            
+        
+
+        marker_a87bb7498ab3325a8652887f68d0db64.bindPopup(popup_7f4971f366cda38531a216b8c2205c48)
+        ;
+
+        
+    
+    
+            marker_a87bb7498ab3325a8652887f68d0db64.bindTooltip(
+                `<div>
+                     4. Cindi's NY Cuycatesson
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a87bb7498ab3325a8652887f68d0db64.setIcon(div_icon_c6c6fdcd13198487b231437baea6d532);
+            
+    
+            var marker_db837258003f3e78a1695fa9109ddbf7 = L.marker(
+                [32.8647842, -96.6771251],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_2fc4479b5fc1d8daab1ab4c64b95f0b6 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #e74c3c; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e5\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_144acf097eae7b0e6fbcb170379bdb60 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_00f1f7a233af5ca3a0fe88132cfd3129 = $(`<div id="html_00f1f7a233af5ca3a0fe88132cfd3129" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 5: Cuy-Fil-A</div>                     <div><b>Allocated entrees:</b> 14</div>                     <div><b>Net margin:</b> $127.00</div>                     <div><b>Gross profit:</b> $1442.00</div>                     <div><b>Cumulative miles:</b> 20.39</div>                 </div>             </div>`)[0];
+                popup_144acf097eae7b0e6fbcb170379bdb60.setContent(html_00f1f7a233af5ca3a0fe88132cfd3129);
+            
+        
+
+        marker_db837258003f3e78a1695fa9109ddbf7.bindPopup(popup_144acf097eae7b0e6fbcb170379bdb60)
+        ;
+
+        
+    
+    
+            marker_db837258003f3e78a1695fa9109ddbf7.bindTooltip(
+                `<div>
+                     5. Cuy-Fil-A
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_db837258003f3e78a1695fa9109ddbf7.setIcon(div_icon_2fc4479b5fc1d8daab1ab4c64b95f0b6);
+            
+    
+            var poly_line_1d546b641836bb0286f5142433329a86 = L.polyline(
+                [[32.8538198, -96.8470282], [32.8015424, -96.8062009], [32.797113, -96.8016238], [32.79538, -96.802136], [32.7799374, -96.800204], [32.7488294, -96.8274388], [32.8538198, -96.8470282]],
+                {"bubblingMouseEvents": true, "color": "#27ae60", "dashArray": "8, 6", "dashOffset": null, "fill": false, "fillColor": "#27ae60", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.9, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            ant_path_81ec25e447505dbdee8b2e0f3dbff830 = L.polyline.antPath(
+              [[32.8538198, -96.8470282], [32.8015424, -96.8062009], [32.797113, -96.8016238], [32.79538, -96.802136], [32.7799374, -96.800204], [32.7488294, -96.8274388], [32.8538198, -96.8470282]],
+              {
+  "stroke": true,
+  "color": "#27ae60",
+  "weight": 4,
+  "opacity": 0.5,
+  "lineCap": "round",
+  "lineJoin": "round",
+  "dashArray": [
+12,
+24,
+],
+  "dashOffset": null,
+  "fill": false,
+  "fillColor": "#27ae60",
+  "fillOpacity": 0.2,
+  "fillRule": "evenodd",
+  "bubblingMouseEvents": true,
+  "smoothFactor": 1.0,
+  "noClip": false,
+  "paused": false,
+  "reverse": false,
+  "hardwareAcceleration": false,
+  "delay": 900,
+  "pulseColor": "#27ae60",
+}
+        ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var marker_977ccb65bd30d3e5ab7d58d08501c1da = L.marker(
+                [32.8015424, -96.8062009],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_43d314e3f4894b62eba1affcf9279fe8 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #27ae60; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e1\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_f90afff7a3d96b49c319e9bbe3a07207 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_30a2b871cd31996a424eb8dd9f5c9775 = $(`<div id="html_30a2b871cd31996a424eb8dd9f5c9775" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 1: Cuy de Brazil</div>                     <div><b>Allocated entrees:</b> 15</div>                     <div><b>Net margin:</b> $102.00</div>                     <div><b>Gross profit:</b> $1170.00</div>                     <div><b>Cumulative miles:</b> 4.78</div>                 </div>             </div>`)[0];
+                popup_f90afff7a3d96b49c319e9bbe3a07207.setContent(html_30a2b871cd31996a424eb8dd9f5c9775);
+            
+        
+
+        marker_977ccb65bd30d3e5ab7d58d08501c1da.bindPopup(popup_f90afff7a3d96b49c319e9bbe3a07207)
+        ;
+
+        
+    
+    
+            marker_977ccb65bd30d3e5ab7d58d08501c1da.bindTooltip(
+                `<div>
+                     1. Cuy de Brazil
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_977ccb65bd30d3e5ab7d58d08501c1da.setIcon(div_icon_43d314e3f4894b62eba1affcf9279fe8);
+            
+    
+            var marker_2aa5ca517ac930e8371142af05885184 = L.marker(
+                [32.797113, -96.8016238],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_dcf27b1981e62ff7d9d7d2084cacc1a5 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #27ae60; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e2\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_0ce4c994de4d1d17b8155cb6cec2b87e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_91eddb28fa556c75050c4a45cebc2d89 = $(`<div id="html_91eddb28fa556c75050c4a45cebc2d89" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 2: Fogo de Cuy</div>                     <div><b>Allocated entrees:</b> 22</div>                     <div><b>Net margin:</b> $57.00</div>                     <div><b>Gross profit:</b> $726.00</div>                     <div><b>Cumulative miles:</b> 5.23</div>                 </div>             </div>`)[0];
+                popup_0ce4c994de4d1d17b8155cb6cec2b87e.setContent(html_91eddb28fa556c75050c4a45cebc2d89);
+            
+        
+
+        marker_2aa5ca517ac930e8371142af05885184.bindPopup(popup_0ce4c994de4d1d17b8155cb6cec2b87e)
+        ;
+
+        
+    
+    
+            marker_2aa5ca517ac930e8371142af05885184.bindTooltip(
+                `<div>
+                     2. Fogo de Cuy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2aa5ca517ac930e8371142af05885184.setIcon(div_icon_dcf27b1981e62ff7d9d7d2084cacc1a5);
+            
+    
+            var marker_967bf7851b471eb50bcd036ff808c028 = L.marker(
+                [32.79538, -96.802136],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_d5b18ae72f0cdfd134c26fb11d5136d3 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #27ae60; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e3\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_c2b962221c9e2cb0caf25f621ff39b6a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_cfe7598cddd88e056a6ede4ed677405d = $(`<div id="html_cfe7598cddd88e056a6ede4ed677405d" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 3: Truluck's Ocean's Finest Seafood Crab and Cuy</div>                     <div><b>Allocated entrees:</b> 12</div>                     <div><b>Net margin:</b> $147.00</div>                     <div><b>Gross profit:</b> $1476.00</div>                     <div><b>Cumulative miles:</b> 5.38</div>                 </div>             </div>`)[0];
+                popup_c2b962221c9e2cb0caf25f621ff39b6a.setContent(html_cfe7598cddd88e056a6ede4ed677405d);
+            
+        
+
+        marker_967bf7851b471eb50bcd036ff808c028.bindPopup(popup_c2b962221c9e2cb0caf25f621ff39b6a)
+        ;
+
+        
+    
+    
+            marker_967bf7851b471eb50bcd036ff808c028.bindTooltip(
+                `<div>
+                     3. Truluck's Ocean's Finest Seafood Crab and Cuy
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_967bf7851b471eb50bcd036ff808c028.setIcon(div_icon_d5b18ae72f0cdfd134c26fb11d5136d3);
+            
+    
+            var marker_b2842731c16cd6a1e169632398d342a1 = L.marker(
+                [32.7799374, -96.800204],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_5fbef6ddc350f8fc1a9559096bdb2299 = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #27ae60; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e4\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_d9fcfeb30dbf3f6ee3bbb275844c7a5f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_5eca133d3fe131055aa3140c3fe90687 = $(`<div id="html_5eca133d3fe131055aa3140c3fe90687" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 4: The French Room and Cuy Porch</div>                     <div><b>Allocated entrees:</b> 18</div>                     <div><b>Net margin:</b> $117.00</div>                     <div><b>Gross profit:</b> $1674.00</div>                     <div><b>Cumulative miles:</b> 6.60</div>                 </div>             </div>`)[0];
+                popup_d9fcfeb30dbf3f6ee3bbb275844c7a5f.setContent(html_5eca133d3fe131055aa3140c3fe90687);
+            
+        
+
+        marker_b2842731c16cd6a1e169632398d342a1.bindPopup(popup_d9fcfeb30dbf3f6ee3bbb275844c7a5f)
+        ;
+
+        
+    
+    
+            marker_b2842731c16cd6a1e169632398d342a1.bindTooltip(
+                `<div>
+                     4. The French Room and Cuy Porch
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b2842731c16cd6a1e169632398d342a1.setIcon(div_icon_5fbef6ddc350f8fc1a9559096bdb2299);
+            
+    
+            var marker_452a2de640d581ec9260396bb78e36e3 = L.marker(
+                [32.7488294, -96.8274388],
+                {
+}
+            ).addTo(map_3f5441cefe793c56c3ce4710a54bf424);
+        
+    
+            var div_icon_774e94b78e468637d545c778b32c2cca = L.divIcon({
+  "html": "\n                        \u003cdiv style=\u0027\n                            width: 28px; height: 28px; line-height: 26px;\n                            border: 2px solid white; border-radius: 50%;\n                            background: #27ae60; color: white;\n                            font-size: 12px; font-weight: 700; text-align: center;\n                            box-shadow: 0 0 8px rgba(0,0,0,.28);\n                        \u0027\u003e5\u003c/div\u003e\n                    ",
+  "className": "empty",
+});
+        
+    
+        var popup_760368db920499fdb776e0605a341021 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_38b5def8b6dcd15f83ecdc5bfe062c1c = $(`<div id="html_38b5def8b6dcd15f83ecdc5bfe062c1c" style="width: 100.0%; height: 100.0%;">                 <div style='font-family:Arial; font-size:13px; min-width:240px;'>                     <div style='font-size:14px; font-weight:700; margin-bottom:4px;'>Stop 5: Cuyfellows</div>                     <div><b>Allocated entrees:</b> 18</div>                     <div><b>Net margin:</b> $72.00</div>                     <div><b>Gross profit:</b> $864.00</div>                     <div><b>Cumulative miles:</b> 9.59</div>                 </div>             </div>`)[0];
+                popup_760368db920499fdb776e0605a341021.setContent(html_38b5def8b6dcd15f83ecdc5bfe062c1c);
+            
+        
+
+        marker_452a2de640d581ec9260396bb78e36e3.bindPopup(popup_760368db920499fdb776e0605a341021)
+        ;
+
+        
+    
+    
+            marker_452a2de640d581ec9260396bb78e36e3.bindTooltip(
+                `<div>
+                     5. Cuyfellows
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_452a2de640d581ec9260396bb78e36e3.setIcon(div_icon_774e94b78e468637d545c778b32c2cca);
+            
+    
+            map_3f5441cefe793c56c3ce4710a54bf424.fitBounds(
+                [[32.7488294, -96.8470282], [32.9008117, -96.6771251]],
+                {}
+            );
+        
+</script>
+</html>
